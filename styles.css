@@ -204,7 +204,7 @@ body{
   cursor:pointer;
 }
 
-/* Frecce navigazione */
+/* ===== FRECCE ELEGANTI ===== */
 .nav-arrow{
   position: fixed;
   top: 50%;
@@ -217,14 +217,44 @@ body{
   align-items: center;
   justify-content: center;
   background: rgba(255,255,255,0.22);
-  color: rgba(90,110,125,0.95);
-  font-size: 26px;
+  color: #6f8798;
+  font-size: 24px;
   line-height: 1;
   cursor: pointer;
   user-select: none;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    opacity 0.25s ease;
+}
+
+.nav-arrow:hover{
+  background: rgba(255,255,255,0.35);
+}
+
+.nav-arrow:active{
+  transform: translateY(-50%) scale(0.96);
+}
+
+.nav-left{
+  left: 12px;
+}
+
+.nav-right{
+  right: 12px;
+}
+
+@media (max-width: 768px){
+  .nav-arrow{
+    width: 38px;
+    height: 38px;
+    font-size: 21px;
+  }
+
+  .nav-left{ left: 8px; }
+  .nav-right{ right: 8px; }
 }
 
 .nav-arrow:hover{
@@ -254,6 +284,7 @@ body{
   .nav-left{ left: 8px; }
   .nav-right{ right: 8px; }
 }
+
 
 
 
