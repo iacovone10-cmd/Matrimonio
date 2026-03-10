@@ -5,6 +5,7 @@ function showPage(index){
   pages.forEach(p => p.classList.remove('active'));
   pages[index].classList.add('active');
   currentIndex = index;
+  updateArrows();
 }
 
 function goNext() {
@@ -17,6 +18,21 @@ function goPrev() {
   if (currentIndex > 0) {
     showPage(currentIndex - 1);
   }
+}
+
+function updateArrows(){
+  const leftArrow = document.querySelector('.nav-left');
+  const rightArrow = document.querySelector('.nav-right');
+
+  if (!leftArrow || !rightArrow) return;
+
+  // Nascondi freccia sinistra sulla cover
+  leftArrow.style.opacity = currentIndex === 0 ? '0' : '1';
+  leftArrow.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+
+  // Nascondi freccia destra sull'ultima pagina
+  rightArrow.style.opacity = currentIndex === pages.length - 1 ? '0' : '1';
+  rightArrow.style.pointerEvents = currentIndex === pages.length - 1 ? 'none' : 'auto';
 }
 
 document.querySelectorAll('.nav-tap').forEach(container => {
@@ -34,3 +50,4 @@ document.querySelectorAll('.nav-tap').forEach(container => {
   }, { passive: true });
 });
 
+updateArrows();
