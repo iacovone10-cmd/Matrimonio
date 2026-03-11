@@ -204,34 +204,37 @@ body{
   cursor:pointer;
 }
 
-/* ===== FRECCE ELEGANTI ===== */
+/* ===== FRECCE ELEGANTI MINIMAL ===== */
 .nav-arrow{
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 100;
-  width: 42px;
-  height: 42px;
-  border-radius: 999px;
+  z-index: 120;
+  width: 28px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255,255,255,0.22);
-  color: #6f8798;
-  font-size: 24px;
+  color: rgba(111,135,152,0.82);
+  font-size: 26px;
   line-height: 1;
   cursor: pointer;
   user-select: none;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 999px;
   transition:
+    opacity 0.25s ease,
     transform 0.2s ease,
     background 0.2s ease,
-    opacity 0.25s ease;
+    color 0.2s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
 }
 
 .nav-arrow:hover{
-  background: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.18);
+  color: rgba(111,135,152,1);
 }
 
 .nav-arrow:active{
@@ -239,50 +242,30 @@ body{
 }
 
 .nav-left{
-  left: 12px;
+  left: 6px;
 }
 
 .nav-right{
-  right: 12px;
+  right: 6px;
 }
 
+/* su mobile ancora più discrete */
 @media (max-width: 768px){
   .nav-arrow{
-    width: 38px;
-    height: 38px;
-    font-size: 21px;
-  }
-
-  .nav-left{ left: 8px; }
-  .nav-right{ right: 8px; }
-}
-
-.nav-arrow:hover{
-  background: rgba(255,255,255,0.35);
-}
-
-.nav-arrow:active{
-  transform: translateY(-50%) scale(0.96);
-}
-
-.nav-left{
-  left: 12px;
-}
-
-.nav-right{
-  right: 12px;
-}
-
-/* più discrete su mobile */
-@media (max-width: 768px){
-  .nav-arrow{
-    width: 38px;
-    height: 38px;
+    width: 24px;
+    height: 42px;
     font-size: 22px;
+    color: rgba(111,135,152,0.75);
+    background: rgba(255,255,255,0.06);
   }
 
-  .nav-left{ left: 8px; }
-  .nav-right{ right: 8px; }
+  .nav-left{
+    left: 4px;
+  }
+
+  .nav-right{
+    right: 4px;
+  }
 }
 
 
