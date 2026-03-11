@@ -26,6 +26,25 @@ function updateArrows(){
 
   if (!leftArrow || !rightArrow) return;
 
+  leftArrow.style.opacity = currentIndex === 0 ? '0' : '1';
+  leftArrow.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+
+  rightArrow.style.opacity = currentIndex === pages.length - 1 ? '0' : '1';
+  rightArrow.style.pointerEvents = currentIndex === pages.length - 1 ? 'none' : 'auto';
+
+  // pagine 2 e 3: frecce più discrete
+  const softPages = [2, 3];
+  const isSoft = softPages.includes(currentIndex);
+
+  const opacity = isSoft ? '0.55' : '1';
+  const bg = isSoft ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.08)';
+
+  leftArrow.style.background = bg;
+  rightArrow.style.background = bg;
+
+  if (currentIndex !== 0) leftArrow.style.opacity = opacity;
+  if (currentIndex !== pages.length - 1) rightArrow.style.opacity = opacity;
+}
   /* sinistra nascosta sulla cover */
   leftArrow.style.opacity = currentIndex === 0 ? '0' : '1';
   leftArrow.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
@@ -59,4 +78,5 @@ document.querySelectorAll('.nav-tap').forEach(container => {
 updateArrows();
 
 updateArrows();
+
 
