@@ -26,7 +26,7 @@ function showPage(index) {
     updateBodyState();
 
     isTransitioning = false;
-  }, 280);
+  }, 260);
 }
 
 function goNext() {
@@ -78,8 +78,6 @@ document.querySelectorAll('.nav-tap').forEach(container => {
       target.closest('.nav-arrow')
     ) return;
 
-    if (currentIndex === 0) return;
-
     const rect = container.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const isRight = x > rect.width / 2;
@@ -95,13 +93,10 @@ let touchEndX = 0;
 
 document.querySelectorAll('.nav-tap').forEach(container => {
   container.addEventListener('touchstart', (e) => {
-    if (currentIndex === 0) return;
     touchStartX = e.changedTouches[0].screenX;
   }, { passive: true });
 
   container.addEventListener('touchend', (e) => {
-    if (currentIndex === 0) return;
-
     const target = e.target;
     if (
       target.closest('a') ||
@@ -115,6 +110,8 @@ document.querySelectorAll('.nav-tap').forEach(container => {
 });
 
 function handleSwipe() {
+  if (currentIndex === 0) return;
+
   const delta = touchEndX - touchStartX;
   if (Math.abs(delta) < 50) return;
 
