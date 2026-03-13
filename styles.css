@@ -19,27 +19,31 @@ body {
 }
 
 /* ===== PAGINE ===== */
-.page {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100dvh;
-  display: none;
-  background: #f7f5f0;
-  opacity: 0;
-  transform: scale(1.015);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+.page{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100dvh;
+  display:none;
+  background:#f7f5f0;
+
+  opacity:0;
+  transform:translateY(22px) scale(1.02);
+
+  transition:
+    opacity 0.75s ease,
+    transform 0.75s cubic-bezier(.22,1,.36,1);
 }
 
-.page.active {
-  display: block;
-  opacity: 1;
-  transform: scale(1);
+.page.active{
+  display:block;
+  opacity:1;
+  transform:translateY(0) scale(1);
 }
 
-.page.fade-out {
-  opacity: 0;
-  transform: scale(1.03);
+.page.fade-out{
+  opacity:0;
+  transform:translateY(-18px) scale(1.01);
 }
 
 .page-inner {
@@ -65,8 +69,8 @@ body {
 }
 
 .page.active .page-bg,
-.page.active .cover-image {
-  transform: scale(1.025) translateY(-2px);
+.page.active .cover-image{
+  transform:scale(1.035) translateY(-3px);
 }
 
 /* ===== LUCE SOFT ===== */
@@ -99,37 +103,77 @@ body {
 }
 
 /* alone morbido e raffinato */
-#cover .seal-hit::before {
-  content: "";
-  position: absolute;
-  inset: 12px;
-  border-radius: 50%;
-  background: radial-gradient(
+#cover .seal-hit{
+  position:absolute;
+  left:50%;
+  top:84.5%;
+  transform:translate(-50%,-50%);
+  width:118px;
+  height:118px;
+  border-radius:50%;
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  z-index:50;
+
+  outline:none;
+  appearance:none;
+  -webkit-tap-highlight-color:transparent;
+
+  transition:
+    transform .35s ease,
+    filter .35s ease;
+}
+
+/* alone centrale */
+#cover .seal-hit::before{
+  content:"";
+  position:absolute;
+  inset:12px;
+  border-radius:50%;
+
+  background:
+  radial-gradient(
     circle,
     rgba(255,255,255,0.22) 0%,
-    rgba(255,255,255,0.08) 38%,
-    rgba(255,255,255,0.00) 70%
+    rgba(255,255,255,0.12) 35%,
+    rgba(255,255,255,0.0) 70%
   );
-  filter: blur(6px);
-  opacity: 0.9;
-  pointer-events: none;
-  animation: sealGlow 3.2s ease-in-out infinite;
+
+  filter:blur(6px);
+  opacity:.85;
+
+  animation:sealGlow 3.4s ease-in-out infinite;
 }
 
-/* luce esterna super soft */
-#cover .seal-hit::after {
-  content: "";
-  position: absolute;
-  inset: -8px;
-  border-radius: 50%;
+/* luce esterna */
+#cover .seal-hit::after{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border-radius:50%;
+
   box-shadow:
-    0 0 18px rgba(255,255,255,0.10),
-    0 0 34px rgba(255,255,255,0.06);
-  opacity: 0.75;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+  0 0 18px rgba(255,255,255,0.12),
+  0 0 36px rgba(255,255,255,0.06);
+
+  opacity:.7;
 }
 
+#cover .seal-hit:hover{
+  transform:translate(-50%,-50%) scale(1.045);
+}
+
+@keyframes sealGlow{
+  0%,100%{
+    opacity:.7;
+    transform:scale(1);
+  }
+  50%{
+    opacity:1;
+    transform:scale(1.04);
+  }
+}
 #cover .seal-hit:hover,
 #cover .seal-hit:active {
   transform: translate(-50%, -50%) scale(1.045);
@@ -229,42 +273,48 @@ body {
 }
 
 /* ===== FRECCE SUPER SOTTILI ===== */
-.nav-arrow {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 120;
-  width: 16px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(126,147,166,0.40);
-  font-size: 28px;
-  font-weight: 300;
-  line-height: 1;
-  cursor: pointer;
-  user-select: none;
-  background: transparent;
-  box-shadow: none;
-  transition: opacity 0.25s ease, transform 0.2s ease, color 0.2s ease;
-  -webkit-tap-highlight-color: transparent;
+.nav-arrow{
+  position:fixed;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:120;
+
+  width:16px;
+  height:28px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:28px;
+  font-weight:300;
+
+  color:rgba(126,147,166,0.36);
+
+  cursor:pointer;
+  user-select:none;
+
+  background:transparent;
+  box-shadow:none;
+
+  transition:
+    opacity .25s ease,
+    transform .2s ease,
+    color .2s ease;
+
+  -webkit-tap-highlight-color:transparent;
 }
 
-.nav-arrow:hover {
-  color: rgba(126,147,166,0.72);
+.nav-arrow:hover{
+  color:rgba(126,147,166,0.65);
 }
 
-.nav-arrow:active {
-  transform: translateY(-50%) scale(0.94);
+.nav-left{
+  left:6px;
 }
 
-.nav-left {
-  left: 4px;
-}
-
-.nav-right {
-  right: 4px;
+.nav-right{
+  right:6px;
 }
 
 /* cover: niente frecce */
@@ -300,4 +350,5 @@ body.soft-arrows .nav-arrow {
     right: 3px;
   }
 }
+
 
