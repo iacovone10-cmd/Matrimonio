@@ -30,9 +30,30 @@ function showPage(index) {
 }
 
 function goNext() {
-  if (currentIndex < pages.length - 1) {
-    showPage(currentIndex + 1);
+  if (currentIndex >= pages.length - 1) return;
+
+  // Se siamo sulla cover, fai animazione speciale
+  if (currentIndex === 0) {
+    const cover = document.getElementById('cover');
+    if (!cover || isTransitioning) return;
+
+    isTransitioning = true;
+    cover.classList.add('opening');
+
+    setTimeout(() => {
+      cover.classList.remove('active', 'opening');
+      pages[1].classList.add('active');
+      currentIndex = 1;
+      updateArrows();
+      updateBodyState();
+      isTransitioning = false;
+    }, 820);
+
+    return;
   }
+
+  showPage(currentIndex + 1);
+}
 }
 
 function goPrev() {
@@ -124,4 +145,5 @@ function handleSwipe() {
 
 updateArrows();
 updateBodyState();
+
 
