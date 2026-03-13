@@ -351,4 +351,54 @@ body.soft-arrows .nav-arrow {
   }
 }
 
+/* ===== EFFETTO APERTURA COVER ===== */
+#cover.opening {
+  animation: coverOpen 0.85s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+#cover.opening .cover-image {
+  animation: coverImageOpen 0.85s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+#cover.opening .seal-hit {
+  animation: sealPress 0.45s ease forwards;
+}
+
+@keyframes coverOpen {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.015);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-32px) scale(1.03);
+  }
+}
+
+@keyframes coverImageOpen {
+  0% {
+    transform: scale(1.02);
+    filter: brightness(1);
+  }
+  100% {
+    transform: scale(1.07);
+    filter: brightness(1.04);
+  }
+}
+
+@keyframes sealPress {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  40% {
+    transform: translate(-50%, -50%) scale(0.94);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.02);
+  }
+}
 
