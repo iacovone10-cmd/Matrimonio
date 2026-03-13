@@ -26,7 +26,7 @@ function showPage(index) {
     updateBodyState();
 
     isTransitioning = false;
-  }, 260);
+  }, 420);
 }
 
 function goNext() {
@@ -124,3 +124,4 @@ function handleSwipe() {
 
 updateArrows();
 updateBodyState();
+
