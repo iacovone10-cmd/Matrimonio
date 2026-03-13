@@ -401,4 +401,16 @@ body.soft-arrows .nav-arrow {
     transform: translate(-50%, -50%) scale(1.02);
   }
 }
+#cover .seal-hit {
+  animation: sealFloat 3.8s ease-in-out infinite;
+}
+
+@keyframes sealFloat {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.02);
+  }
+}
 
