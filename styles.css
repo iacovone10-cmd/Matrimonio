@@ -404,4 +404,18 @@ body.soft-arrows .nav-arrow {
   .nav-right {
     right: 3px;
   }
+.hs-church,
+.hs-restaurant{
+
+animation:pinPulse 3.5s ease-in-out infinite;
+transition:transform .3s ease;
+
 }
+
+.hs-church:hover,
+.hs-restaurant:hover{
+
+transform:translate(-50%,-50%) scale(1.08);
+
+}
+  }
