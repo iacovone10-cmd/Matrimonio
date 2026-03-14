@@ -70,7 +70,9 @@ body {
 .page.active .page-bg,
 .page.active .cover-image {
   transform:scale(1.04) translateY(-6px);
+ animation: firstPageEntrance 1s cubic-bezier(.22,1,.36,1);
 }
+
 
 /* ===== LUCE SOFT ===== */
 .page::after {
@@ -440,4 +442,16 @@ box-shadow:0 0 18px rgba(255,255,255,0.25);
   100%{
     transform:translate(-50%,-50%) scale(1.02);
   }
+/* ===== OMBRA SOTTO LA COVER ===== */
+
+#cover{
+  position:relative;
 }
+
+/* ombra iniziale molto leggera */
+#cover::before{
+
+  content:"";
+  position:absolute
+  }
+
