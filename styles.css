@@ -66,6 +66,8 @@ body {
   transition:
     transform 1.3s cubic-bezier(.22,1,.36,1),
     filter 1.3s ease;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.08));
+
 }
 
 .page.active .page-bg,
