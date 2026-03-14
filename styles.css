@@ -204,7 +204,24 @@ body {
     opacity: 1;
     transform: scale(1.035);
   }
+#cover .seal-hit{
+
+animation:sealFloat 4s ease-in-out infinite;
+
 }
+
+@keyframes sealFloat{
+
+0%,100%{
+transform:translate(-50%,-50%) scale(1);
+}
+
+50%{
+transform:translate(-50%,-50%) scale(1.03);
+}
+
+}
+
 
 /* apertura cover */
 #cover.opening {
