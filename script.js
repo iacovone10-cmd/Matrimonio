@@ -32,7 +32,7 @@ function showPage(index) {
 function goNext() {
   if (currentIndex >= pages.length - 1) return;
 
-  // cover: animazione speciale
+  // cover: apertura elegante
   if (currentIndex === 0) {
     const cover = document.getElementById('cover');
     if (!cover || isTransitioning) return;
@@ -47,7 +47,7 @@ function goNext() {
       updateArrows();
       updateBodyState();
       isTransitioning = false;
-    }, 820);
+    }, 980);
 
     return;
   }
