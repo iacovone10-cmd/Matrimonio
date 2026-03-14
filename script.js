@@ -32,7 +32,7 @@ function showPage(index) {
 function goNext() {
   if (currentIndex >= pages.length - 1) return;
 
-  // Se siamo sulla cover, fai animazione speciale
+  // cover: animazione speciale
   if (currentIndex === 0) {
     const cover = document.getElementById('cover');
     if (!cover || isTransitioning) return;
@@ -53,7 +53,6 @@ function goNext() {
   }
 
   showPage(currentIndex + 1);
-}
 }
 
 function goPrev() {
@@ -88,7 +87,7 @@ function updateBodyState() {
   document.body.classList.toggle('soft-arrows', currentIndex === 2 || currentIndex === 3);
 }
 
-/* tap laterale: NO sulla cover */
+/* tap laterale */
 document.querySelectorAll('.nav-tap').forEach(container => {
   container.addEventListener('click', (e) => {
     const target = e.target;
@@ -145,5 +144,3 @@ function handleSwipe() {
 
 updateArrows();
 updateBodyState();
-
-
