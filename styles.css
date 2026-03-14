@@ -247,7 +247,7 @@ transform:translate(-50%,-50%) scale(1.03);
   }
   100% {
     opacity: 0;
-    transform: translateY(-48px) scale(1.03) rotateX(10deg);
+    transform:translateY(-60px) scale(1.04) rotateX(12deg);
   }
 }
 
