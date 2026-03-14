@@ -63,16 +63,31 @@ body {
   display: block;
   pointer-events: none;
   will-change: transform;
-  transform 1.3s cubic-bezier(.22,1,.36,1),
-  filter 1.3s ease;
+  transition:
+    transform 1.3s cubic-bezier(.22,1,.36,1),
+    filter 1.3s ease;
 }
 
 .page.active .page-bg,
 .page.active .cover-image {
-  transform:scale(1.04) translateY(-6px);
- animation: firstPageEntrance 1s cubic-bezier(.22,1,.36,1);
+  transform: scale(1.04) translateY(-6px);
 }
 
+/* solo prima pagina: entrata elegante */
+#page1.active .page-bg {
+  animation: firstPageEntrance 1s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes firstPageEntrance {
+  0% {
+    opacity: 0.85;
+    transform: scale(1.08) translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.04) translateY(-6px);
+  }
+}
 
 /* ===== LUCE SOFT ===== */
 .page::after {
@@ -85,6 +100,35 @@ body {
 }
 
 /* ===== COVER ===== */
+#cover {
+  transform-origin: center top;
+  backface-visibility: hidden;
+  perspective: 1200px;
+  position: relative;
+}
+
+/* ombra sotto cover */
+#cover::before {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 6%;
+  height: 32px;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.18), rgba(0,0,0,0));
+  filter: blur(10px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.4s ease, transform 0.6s ease;
+}
+
+#cover.opening::before {
+  opacity: 0.55;
+  transform: scaleX(1.08) translateY(6px);
+}
+
 #cover .seal-hit {
   position: absolute;
   left: 50%;
@@ -103,7 +147,7 @@ body {
   transition: transform .35s ease, filter .35s ease;
 }
 
-/* alone centrale */
+/* glow sigillo */
 #cover .seal-hit::before {
   content: "";
   position: absolute;
@@ -130,11 +174,12 @@ body {
     0 0 18px rgba(255,255,255,0.12),
     0 0 36px rgba(255,255,255,0.06);
   opacity: .7;
+  transition: opacity 0.3s ease;
 }
 
 #cover .seal-hit:hover,
 #cover .seal-hit:active {
-  transform:translate(-50%,-50%) scale(.94);
+  transform: translate(-50%, -50%) scale(1.045);
   filter: brightness(1.03);
 }
 
@@ -161,60 +206,51 @@ body {
   }
 }
 
-@keyframes sealFloat {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.02);
-  }
-}
-
 /* apertura cover */
 #cover.opening {
-  animation: coverOpen 0.85s cubic-bezier(.22,1,.36,1) forwards;
+  animation: coverLiftAway 1s cubic-bezier(.22,1,.36,1) forwards;
 }
 
 #cover.opening .cover-image {
-  animation: coverImageOpen 0.85s cubic-bezier(.22,1,.36,1) forwards;
+  animation: coverImageTilt 1s cubic-bezier(.22,1,.36,1) forwards;
 }
 
 #cover.opening .seal-hit {
-  animation: sealPress 0.45s ease forwards;
+  animation: sealPressLuxury 0.45s ease forwards;
 }
 
-@keyframes coverOpen {
+@keyframes coverLiftAway {
   0% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0) scale(1) rotateX(0deg);
   }
-  60% {
+  35% {
     opacity: 1;
-    transform: translateY(-8px) scale(1.015);
+    transform: translateY(-6px) scale(1.01) rotateX(3deg);
   }
   100% {
     opacity: 0;
-    transform: translateY(-32px) scale(1.03);
+    transform: translateY(-48px) scale(1.03) rotateX(10deg);
   }
 }
 
-@keyframes coverImageOpen {
+@keyframes coverImageTilt {
   0% {
     transform: scale(1.02);
     filter: brightness(1);
   }
   100% {
-    transform: scale(1.07);
-    filter: brightness(1.04);
+    transform: scale(1.08) translateY(-8px);
+    filter: brightness(1.05);
   }
 }
 
-@keyframes sealPress {
+@keyframes sealPressLuxury {
   0% {
     transform: translate(-50%, -50%) scale(1);
   }
   40% {
-    transform: translate(-50%, -50%) scale(0.94);
+    transform: translate(-50%, -50%) scale(0.93);
   }
   100% {
     transform: translate(-50%, -50%) scale(1.02);
@@ -241,18 +277,7 @@ body {
 */
 
 /* ===== POSIZIONI HOTSPOT ===== */
-
-/* Page2: chiesa */
-#page2 .hs-church {
-  left: 50%;
-  top: 80%;
-  width: 78px;
-  height: 78px;
-  transform: translate(-50%, -50%);
-  border-radius: 999px;
-}
-
-/* Page3: ristorante */
+#page2 .hs-church,
 #page3 .hs-restaurant {
   left: 50%;
   top: 80%;
@@ -262,7 +287,23 @@ body {
   border-radius: 999px;
 }
 
-/* Page4: RSVP */
+.hs-church,
+.hs-restaurant {
+  animation: pinPulse 3.5s ease-in-out infinite;
+}
+
+@keyframes pinPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 0 rgba(255,255,255,0);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 0 18px rgba(255,255,255,0.25);
+  }
+}
+
+/* Page4 */
 #page4 .hs-yes {
   left: 25%;
   top: 49.5%;
@@ -281,7 +322,7 @@ body {
   border-radius: 24px;
 }
 
-/* Page5: regalo */
+/* Page5 */
 #page5 .hs-gift {
   left: 50%;
   top: 58%;
@@ -291,7 +332,7 @@ body {
   border-radius: 22px;
 }
 
-/* ===== FRECCE SUPER SOTTILI ===== */
+/* ===== FRECCE ===== */
 .nav-arrow {
   position: fixed;
   top: 50%;
@@ -333,13 +374,11 @@ body {
   right: 6px;
 }
 
-/* cover: niente frecce */
 body.on-cover .nav-arrow {
   opacity: 0 !important;
   pointer-events: none !important;
 }
 
-/* pagine 2 e 3: frecce ancora più leggere */
 body.soft-arrows .nav-arrow {
   opacity: 0.35;
 }
@@ -365,93 +404,4 @@ body.soft-arrows .nav-arrow {
   .nav-right {
     right: 3px;
   }
-.hs-church,
-.hs-restaurant{
-  animation:pinPulse 3.5s ease-in-out infinite;
 }
-
-@keyframes pinPulse{
-
-0%,100%{
-transform:translate(-50%,-50%) scale(1);
-box-shadow:0 0 0 rgba(255,255,255,0);
-}
-
-50%{
-transform:translate(-50%,-50%) scale(1.05);
-box-shadow:0 0 18px rgba(255,255,255,0.25);
-}
-
-/* ===== COVER OPEN LUXURY ===== */
-#cover{
-  transform-origin: center top;
-  backface-visibility: hidden;
-  perspective: 1200px;
-}
-
-#cover.opening{
-  animation: coverLiftAway 1s cubic-bezier(.22,1,.36,1) forwards;
-}
-
-#cover.opening .cover-image{
-  animation: coverImageTilt 1s cubic-bezier(.22,1,.36,1) forwards;
-}
-
-#cover.opening .seal-hit{
-  animation: sealPressLuxury 0.45s ease forwards;
-}
-
-@keyframes coverLiftAway{
-  0%{
-    opacity:1;
-    transform:translateY(0) scale(1) rotateX(0deg);
-  }
-
-  35%{
-    opacity:1;
-    transform:translateY(-6px) scale(1.01) rotateX(3deg);
-  }
-
-  100%{
-    opacity:0;
-    transform:translateY(-48px) scale(1.03) rotateX(10deg);
-  }
-}
-
-@keyframes coverImageTilt{
-  0%{
-    transform:scale(1.02);
-    filter:brightness(1);
-  }
-
-  100%{
-    transform:scale(1.08) translateY(-8px);
-    filter:brightness(1.05);
-  }
-}
-
-@keyframes sealPressLuxury{
-  0%{
-    transform:translate(-50%,-50%) scale(1);
-  }
-
-  40%{
-    transform:translate(-50%,-50%) scale(0.93);
-  }
-
-  100%{
-    transform:translate(-50%,-50%) scale(1.02);
-  }
-/* ===== OMBRA SOTTO LA COVER ===== */
-
-#cover{
-  position:relative;
-}
-
-/* ombra iniziale molto leggera */
-#cover::before{
-
-  content:"";
-  position:absolute
-  }
-
